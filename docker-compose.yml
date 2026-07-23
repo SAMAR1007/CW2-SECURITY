@@ -1,0 +1,57 @@
+# =============================================================================
+# HomeComf — Docker Compose Development Environment
+# =============================================================================
+# Start: docker compose up -d
+# Stop:  docker compose down
+# Logs:  docker compose logs -f
+# =============================================================================
+
+services:
+  # ─── Frontend (Next.js) ──────────────────────────────────────────────────
+  frontend:
+    container_name: homecomf-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps # Use deps target for dev to avoid full build
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:5000
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_BASE_URL=http://localhost:5000
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      # Mount source code for hot reload in development
+      - ./app:/app/app
+      - ./lib:/app/lib
+      - ./public:/app/public
+      - ./next.config.mjs:/app/next.config.mjs
+      # Persist node_modules to avoid re-installing
+      - node_modules:/app/node_modules
+    command: npm run dev
+    restart: unless-stopped
+    networks:
+      - homecomf-network
+
+  # ─── MongoDB (optional, use --profile full) ──────────────────────────
+  mongo:
+    container_name: homecomf-mongodb
+    image: mongo:7
+    profiles:
+      - full
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - homecomf-network
+
+volumes:
+  node_modules:
+  mongo_data:
+
+networks:
+  homecomf-network:
+    driver: bridge
