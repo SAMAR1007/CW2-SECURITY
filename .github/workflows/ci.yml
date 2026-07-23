@@ -258,9 +258,8 @@ jobs:
           node-version: 20
 
       - name: Run dependency audit
-        run: npx audit-ci --high
-        continue-on-error: true
-        # Uses audit-ci for cross-package-manager support # Don't block on audit warnings
+        run: pnpm audit --audit-level=high
+        continue-on-error: true # Don't block on audit warnings
 
       - name: Run Socket.dev check (if configured)
         uses: socketdev/socket-action@v0.4.0
