@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Nivaas',
-    short_name: 'Nivaas',
+    name: 'HomeComf',
+    short_name: 'HomeComf',
     description: 'Travel booking platform for stays and experiences in Nepal.',
     start_url: '/',
     display: 'standalone',

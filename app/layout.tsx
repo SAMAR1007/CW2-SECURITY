@@ -8,15 +8,15 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Nivaas - Host Place or Experience in Nepal",
-  description: "Login, Sign up, or Start hosting on Nivaas",
+  title: "HomeComf - Host Place or Experience in Nepal",
+  description: "Login, Sign up, or Start hosting on HomeComf",
   generator: "Next.js",
   manifest: "/manifest.webmanifest",
-  applicationName: "Nivaas",
+  applicationName: "HomeComf",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Nivaas",
+    title: "HomeComf",
   },
   icons: {
     icon: [
